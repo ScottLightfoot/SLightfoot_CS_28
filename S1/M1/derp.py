@@ -304,95 +304,52 @@ def file_io():
     read_txt(bar_file)
 
 
-# # Open up a file called "bar.txt" (which doesn't exist yet) for
-# # writing. Write three lines of arbitrary content to that file,
-# # then close the file. Open up "bar.txt" and inspect it to make
-# # sure that it contains what you expect it to contain
+# * `cal` -- Experiment with module imports and implement a text-based calendar
+def cal(month = None, year = None):
+    import calendar
+    from datetime import datetime as dt
 
-# # YOUR CODE HERE
+    if month == None: month = dt.now().month
+    if year == None: year = dt.now().year
 
+    try:
+        c = calendar.TextCalendar(calendar.SUNDAY)
+        cal_str = c.formatmonth(year, month)
+        print(cal_str)
+    except:
+        print('cal function expects 2 inputs - (month, year). \nTry again.  Try harder.')
 
-# #######
+# * `classes` -- Classes and objects
+def classes():
+    class LatLon:
+        
+        def __init__(self, lat, lon): 
+            self.lat = lat
+            self.lon = lon
+    
+    class Waypoint(LatLon):
+        def __init__(self, name, lat, lon):
+            self.name = name
+            super().__init__(lat, lon)
 
-# # * `cal` -- Experiment with module imports and implement a text-based calendar
-# def cal():
-#     pass
+        def __str__(self):
+            wp = f'{self.name}: {self.lat}, {self.lon}'
+            return wp
 
-# """
-# The Python standard library's 'calendar' module allows you to
-# render a calendar to your terminal.
-# https://docs.python.org/3.6/library/calendar.html
+    class Geocache(Waypoint):
+        def __init__(self, difficulty, size, name, lat, lon):
+            self.difficulty = difficulty
+            self.size = size
+            super().__init__(name, lat, lon)
+        def __str__(self):
+            wp = f'{self.name}: {self.lat}, {self.lon} \n diff: {self.difficulty} \n size: {self.size}'
+            return wp
+    
+    new_waypoint = Waypoint("Catacombs", 41.70505, -121.51521)
+    print(new_waypoint)
 
-# Write a program that accepts user input of the form
-#   `14_cal.py [month] [year]`
-# and does the following:
-#  - If the user doesn't specify any input, your program should
-#    print the calendar for the current month. The 'datetime'
-#    module may be helpful for this.
-#  - If the user specifies one argument, assume they passed in a
-#    month and render the calendar for that month of the current year.
-#  - If the user specifies two arguments, assume they passed in
-#    both the month and the year. Render the calendar for that
-#    month and year.
-#  - Otherwise, print a usage statement to the terminal indicating
-#    the format that your program expects arguments to be given.
-#    Then exit the program.
-
-# Note: the user should provide argument input (in the initial call to run the file) and not 
-# prompted input. Also, the brackets around year are to denote that the argument is
-# optional, as this is a common convention in documentation.
-
-# This would mean that from the command line you would call `python3 14_cal.py 4 2015` to 
-# print out a calendar for April in 2015, but if you omit either the year or both values, 
-# it should use today’s date to get the month and year.
-# """
-
-# import sys
-# import calendar
-# from datetime import datetime
-
-
-# #######
-
-
-
-# # * `classes` -- Classes and objects
-# def classes():
-#     pass
-
-# # Make a class LatLon that can be passed parameters `lat` and `lon` to the
-# # constructor
-
-# # YOUR CODE HERE
-
-# # Make a class Waypoint that can be passed parameters `name`, `lat`, and `lon` to the
-# # constructor. It should inherit from LatLon. Look up the `super` method.
-
-# # YOUR CODE HERE
-
-# # Make a class Geocache that can be passed parameters `name`, `difficulty`,
-# # `size`, `lat`, and `lon` to the constructor. What should it inherit from?
-
-# # YOUR CODE HERE
-
-# # Make a new waypoint and print it out: "Catacombs", 41.70505, -121.51521
-
-# # YOUR CODE HERE
-
-# # Without changing the following line, how can you make it print into something
-# # more human-readable? Hint: Look up the `object.__str__` method
-# print(waypoint)
-
-# # Make a new geocache "Newberry Views", diff 1.5, size 2, 44.052137, -121.41556
-
-# # YOUR CODE HERE
-
-# # Print it--also make this print more nicely
-# print(geocache)
-
-# #######
-
-
+    new_cache = Geocache(1.5, 2, 'Newberry Views', 44052137, -121.41556)
+    print(new_cache)
 
 def sandbox(list, passes):
     
