@@ -269,24 +269,39 @@ def scopes():
 def file_io():
     from pathlib import Path
 
+    def read_txt(filepath):
+        with open(filepath) as f:
+            read_f = f.read()
+            print(read_f)
+
+
     foo_file = ''
 
-    if Path('./intro-python-I/src/foo.txt').exists():
-        foo_file = './intro-python-I/src/foo.txt'
+    if Path('../._lambda_repos/intro-python-I/src/foo.txt').exists():
+        foo_file = '../._lambda_repos/intro-python-I/src/foo.txt'
     else:
-        foo_file = sorted(Path().rglob('foo.txt'))[0]
+        foo_file = sorted(Path('../').rglob('foo.txt'))[0]
         print('(not operating from root dir, searched/found foo.txt)')
 
-    with open(foo_file) as f:
-        read_f = f.read()
-        print(read_f)
+    read_txt(foo_file)
+    print('\n\n')
     
-    print(f'No need to f.close()! ~~~ ({f.closed})')
+    # print(f'No need to f.close()! ~~~ ({f.closed})')
 
     l1 = "For Sale:"
-    l2 = "Baby shoes,"
+    l2 = "Baby Shoes,"
     l3 = "never worn."
 
+    six_word_story = [l1, l2, l3]
+
+    txt_path = foo_file.replace('foo.txt', '')
+    bar_file = txt_path + 'bar.txt'
+
+    with open(bar_file, 'w+') as f:
+        for i in six_word_story:
+            f.write(f'{i}\r\n')
+    
+    read_txt(bar_file)
 
 
 # # Open up a file called "bar.txt" (which doesn't exist yet) for
