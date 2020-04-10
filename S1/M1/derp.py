@@ -106,9 +106,9 @@ def slices(a = [2, 4, 1, 7, 9, 6], s = 'Hello, world!'):
     print(s[7:12])
 
 
-# * `comprehensions` -- List comprehensions
+# * `comprehensions` -- List comprehensions  *** LIST COMPREHENSION GOES INSIDE THE LIST! (don't append) ***
 def comprehensions(y=[], a = ['foo', 'bar', 'baz']):
-    y = []
+    y = [i for i in range(1,6)]
     for i in range(1,6): y.append(i)
     print(y)
 
