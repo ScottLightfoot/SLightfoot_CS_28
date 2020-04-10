@@ -7,8 +7,14 @@ import csv
 class City():
     def __init__(self, name, lat, lon):
         self.name = name
-        self.lat = lat
-        self.lon = lon
+        try:
+            self.lat = float(lat)
+        except Exception:
+            pass
+        try:
+            self.lon = float(lon)
+        except Exception:
+            pass
 
 
 # We have a collection of US cities with population over 750,000 stored in the
@@ -28,14 +34,19 @@ cities = []
 def cityreader():
     global cities
 
-    cities = [City(i[0], i[3], i[4]) for i in csv.reader(open('cities.csv','r'))]
-    cities.pop(0)
+    with open('cities.csv','r') as derp:
+        cities = [City(i[0], i[3], i[4]) for i in csv.reader(derp)]
+        cities.pop(0)
+
+    return cities
 
 cityreader()
+import pdb
+pdb.set_trace()
 
 # Print the list of cities (name, lat, lon), 1 record per line.
 for c in cities:
-    print(f'{c.name}: {c.lat} || {c.lon}')
+    print(f'{c.name}, {c.lat}, {c.lon}')
 
 # STRETCH GOAL!
 #
@@ -78,8 +89,8 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
 
     for c in cities:
 
-        if (lat > lats[0]) and (lat < lats[1]):
-            if (lon > lons[0]) and (lon < lons[1]):
+        if (c.lat > lats[0]) and (c.lat < lats[1]):
+            if (c.lon > lons[0]) and (c.lon < lons[1]):
                 within.append(c)
             else:
                 pass
