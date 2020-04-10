@@ -41,8 +41,6 @@ def cityreader():
     return cities
 
 cityreader()
-import pdb
-pdb.set_trace()
 
 # Print the list of cities (name, lat, lon), 1 record per line.
 for c in cities:
